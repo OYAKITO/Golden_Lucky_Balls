@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from django.http import JsonResponse #for return JSON data in HTTP response
-from .utils import generate_lotto_draw #to function import of utils.py
+from .utils import Generated_lotto_draw #to function import of utils.py
 from .models import LottoDraw #to function import models
+
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
+
 def sign_up(request):
     return render(request, 'signup.html')
-def generate_lotto_draw(request): 
-    #intended to call HTTP request to made specific URL handled by django
+   
+def Generated_lotto_draw(request):  #intended to call HTTP request to made specific URL handled by django
     numbers = generate_lotto_draw 
     #we use ORM(Object-relational Mapper)"parang object-oriented interface para sa python" para sa lotto draw objec with generated numbers
     lottoDraw.objects.create(numbers = numbers) 
