@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views 
-from . views import  Generated_lotto_draw 
 #we apply the url pattern for lotto draw endpoint
 
 urlpatterns = [path('', views.home, name= 'Home'),
