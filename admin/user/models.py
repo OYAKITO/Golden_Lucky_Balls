@@ -1,8 +1,10 @@
 from django.db import models
 
 # Create your models here.
-
-#simple store lotto draw result for winning numbers
-class LottoDraw(models.Model):
-    numbers = models.CharField(max_length=255)
+class User(models.Model):
+    username = models.CharField(max_length=100)
+    coins = models.IntegerField()
+    def __str__(self) -> str:
+        return self.username
+    
     
