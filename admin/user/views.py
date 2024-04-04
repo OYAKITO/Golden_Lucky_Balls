@@ -7,7 +7,6 @@ def index(response, id):
     return render(response, 'user/base.html', {'username':user.username})
 
 def home(response):
-    pass
     return render(response, 'user/home.html', {'username': 'Hello User'})
 
 def sign_up(request):
