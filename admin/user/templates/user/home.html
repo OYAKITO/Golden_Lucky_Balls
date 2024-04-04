@@ -1,5 +1,43 @@
 {% extends 'user/base.html'%}
 
+{% block header%}Lotto Numbers Generator{% endblock %}
+
 {% block content %}
-<h1>Home Page</h1>
+<div class="position-relative">
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <ul class="list-group list-group-horizontal">
+            <li class="list-group-item" id="num1"></li>
+            <li class="list-group-item" id="num2"></li>
+            <li class="list-group-item" id="num3"></li>
+            <li class="list-group-item" id="num4"></li>
+            <li class="list-group-item" id="num5"></li>
+            <li class="list-group-item" id="num6"></li>
+        </ul>
+    </div>
+</div>
+<br><br>
+<div class="text-center">
+    <button type="button" id="rollButton">Generate Numbers</button>
+</div>
+
+<script>
+document.getElementById("rollButton").onclick = function(){
+    let lottoNums = new Set();
+    const size = 6;
+
+    while(lottoNums.size < size){
+         num = Math.floor(Math.random() * 61) + 1;
+            lottoNums.add(num);
+    }
+    
+    const numArr = Array.from(lottoNums);
+    for(let i = 0; i < size; i++){
+        document.getElementById(`num${i+1}`).innerHTML = numArr[i];
+    }
+
+}
+</script>
+
+
+<p>Betting is still Work in Progress TeeHee 🫡</p>
 {% endblock %}
