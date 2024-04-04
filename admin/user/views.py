@@ -4,13 +4,14 @@ from .models import User
 # Create your views here.
 def index(response, id):
     user = User.objects.get(id=id)
-    return HttpResponse('<h1>%s</h1>' % user)
+    return render(response, 'user/base.html', {'username':user.username})
 
-def home(request):
-    return render(request, 'home.html')
+def home(response):
+    pass
+    return render(response, 'user/home.html', {'username': 'Hello User'})
 
 def sign_up(request):
-    return render(request, 'signup.html')
+    return render(request, 'user/signup.html')
    
 
     
