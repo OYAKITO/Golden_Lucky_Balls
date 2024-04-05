@@ -1,5 +1,6 @@
 let attempts = 0; // Variable to track number of attempts
 let userMoney = 1000; // User's initial money
+let betAmount = 0; // Initialize bet amount variable
 
 document.getElementById("rollButton").onclick = function(){
     attempts++; // Increment attempts counter
@@ -9,12 +10,11 @@ document.getElementById("rollButton").onclick = function(){
 
     // If user has placed a bet, set the first generated number to match user's 6 numbers
     if (attempts === 1) {
-        let betAmount = parseInt(document.getElementById("betAmount").value);
+        betAmount = parseInt(document.getElementById("betAmount").value); // Parse bet amount
         if (betAmount > userMoney) {
             alert("You don't have enough money for this bet.");
             return;
         }
-        userMoney -= betAmount; // Deduct bet amount from user's money
 
         for(let i = 1; i <= 6; i++){
             let userInput = parseInt(document.getElementById(`num${i}Input`).value);
@@ -50,8 +50,25 @@ document.getElementById("rollButton").onclick = function(){
         document.getElementById(`num${i+1}`).innerHTML = numArr[i];
     }
 
-    // Check if it's the second or subsequent attempt and inform user that they lost
-    if (attempts > 1) {
+    // Check if user's numbers match lottery numbers
+    let userWins = true;
+    for(let i = 0; i < size; i++){
+        if (!userNumbers.includes(numArr[i])) {
+            userWins = false;
+            break;
+        }
+    }
+
+    // If user wins, increase their money by the bet amount
+    if (userWins) {
+        userMoney += betAmount;
+        alert("Congratulations! You won!");
+    } else if (attempts > 1) {
+        // If it's the second or subsequent attempt and the user loses, deduct the bet amount from their money
+        userMoney -= betAmount;
+        if (betAmount >= userMoney) {
+            userMoney = 0;
+        }
         alert("Sorry, you lost. Please try again.");
         attempts = 0; // Reset attempts counter
     }
@@ -60,6 +77,12 @@ document.getElementById("rollButton").onclick = function(){
 }
 
 document.getElementById("placeBetButton").onclick = function(){
+    let betAmount = parseInt(document.getElementById("betAmount").value); // Parse bet amount
+    if (betAmount > userMoney) {
+        alert("You don't have enough money for this bet.");
+        return;
+    }
+
     // Disable the bet button after placing the bet
     this.disabled = true;
 
